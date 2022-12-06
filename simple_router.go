@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var flg waggy.FullCGI
+
 func routerHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello")
 }
@@ -15,11 +17,11 @@ func routerGoodbye(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExampleRouter() {
-	greetingHandler := wagi.InitHandler().
+	greetingHandler := wagi.InitHandler(nil).
 		MethodHandler(http.MethodGet, routerHello).
 		MethodHandler(http.MethodDelete, routerGoodbye)
 
-	router := wagi.InitRouter(nil)
+	router := wagi.InitRouter(&flg)
 
 	router.Handle("/greeting", greetingHandler)
 
