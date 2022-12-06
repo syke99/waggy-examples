@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var flg waggy.FullCGI
+
 func defErrorHandler(w http.ResponseWriter, r *http.Request) {
 	params := wagi.Vars(r)
 
@@ -30,7 +32,7 @@ func ExampleDefaultError() {
 		Status: http.StatusBadRequest,
 	}
 
-	greetingHandler := wagi.InitHandlerWithRoute("/greeting/{type}").
+	greetingHandler := wagi.InitHandlerWithRoute("/greeting/{type}", &flg).
 		MethodHandler(http.MethodGet, defErrorHandler).
 		WithDefaultResponse([]byte("So what's good?")).
 		WithDefaultErrorResponse(defaultError, http.StatusBadRequest)
