@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var flg waggy.FullCGI
+
 func handlerHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello")
 }
@@ -15,7 +17,7 @@ func handlerGoodbye(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExampleHandler() {
-	greetingHandler := wagi.InitHandlerWithRoute("/greeting").
+	greetingHandler := wagi.InitHandlerWithRoute("/greeting", &flg).
 		MethodHandler(http.MethodGet, handlerHello).
 		MethodHandler(http.MethodDelete, handlerGoodbye)
 
