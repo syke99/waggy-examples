@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var flg waggy.FullCGI
+
 func defRespHandler(w http.ResponseWriter, r *http.Request) {
 	params := wagi.Vars(r)
 
@@ -22,7 +24,7 @@ func defRespHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExampleDefaultResponse() {
-	greetingHandler := wagi.InitHandlerWithRoute("/greeting/{type}").
+	greetingHandler := wagi.InitHandlerWithRoute("/greeting/{type}", &flg).
 		MethodHandler(http.MethodGet, defRespHandler).
 		WithDefaultResponse([]byte("So what's good?"))
 
