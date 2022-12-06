@@ -8,6 +8,8 @@ import (
 	wagi "github.com/syke99/waggy/v2"
 )
 
+var flg waggy.FullCGI
+
 func ExampleWaggyHandler_WithDefaultResponse() {
 	goodbyeHandler := func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Hello")
@@ -22,7 +24,7 @@ func ExampleWaggyHandler_WithDefaultResponse() {
 		_ = fmt.Errorf("error marshaling body, err: %s", err)
 	}
 
-	handler := wagi.InitHandlerWithRoute("/example/test/route").
+	handler := wagi.InitHandlerWithRoute("/example/test/route", &flg).
 		MethodHandler(http.MethodDelete, goodbyeHandler).
 		WithDefaultResponse(defaultResponseBytes)
 
@@ -43,7 +45,7 @@ func ExampleWaggyHandler_WithDefaultErrorResponse() {
 		Status: http.StatusBadRequest,
 	}
 
-	handler := wagi.InitHandlerWithRoute("/example/test/route").
+	handler := wagi.InitHandlerWithRoute("/example/test/route", &flg).
 		MethodHandler(http.MethodDelete, goodbyeHandler).
 		WithDefaultErrorResponse(defaultError, http.StatusBadRequest)
 
