@@ -19,7 +19,7 @@ func ExampleRouter() {
 		MethodHandler(http.MethodGet, routerHello).
 		MethodHandler(http.MethodDelete, routerGoodbye)
 
-	router := wagi.InitRouter()
+	router := wagi.InitRouter(nil)
 
 	router.Handle("/greeting", greetingHandler)
 
