@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var flg waggy.FullCGI
+
 func routerPathParamsHandler(w http.ResponseWriter, r *http.Request) {
 	params := wagi.Vars(r)
 
@@ -20,10 +22,10 @@ func routerPathParamsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExampleRouterPathParams() {
-	greetingHandler := wagi.InitHandler().
+	greetingHandler := wagi.InitHandler(nil).
 		MethodHandler(http.MethodGet, routerPathParamsHandler)
 
-	router := wagi.InitRouter()
+	router := wagi.InitRouter(&flg)
 
 	router.Handle("/greeting/{type}", greetingHandler)
 
