@@ -22,10 +22,10 @@ func routerPathParamsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExampleRouterPathParams() {
-	greetingHandler := wagi.InitHandler(nil).
+	greetingHandler := wagi.NewHandler(nil).
 		MethodHandler(http.MethodGet, routerPathParamsHandler)
 
-	router := wagi.InitRouter(&flg)
+	router := wagi.NewRouter(&flg)
 
 	router.Handle("/greeting/{type}", greetingHandler)
 
