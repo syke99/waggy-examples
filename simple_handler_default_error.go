@@ -32,7 +32,7 @@ func ExampleDefaultError() {
 		Status: http.StatusBadRequest,
 	}
 
-	greetingHandler := wagi.InitHandlerWithRoute("/greeting/{type}", &flg).
+	greetingHandler := wagi.NewHandlerWithRoute("/greeting/{type}", &flg).
 		MethodHandler(http.MethodGet, defErrorHandler).
 		WithDefaultResponse([]byte("So what's good?")).
 		WithDefaultErrorResponse(defaultError, http.StatusBadRequest)
