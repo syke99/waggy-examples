@@ -17,7 +17,7 @@ func handlerGoodbye(w http.ResponseWriter, r *http.Request) {
 }
 
 func ExampleHandler() {
-	greetingHandler := wagi.InitHandlerWithRoute("/greeting", &flg).
+	greetingHandler := wagi.NewHandlerWithRoute("/greeting", &flg).
 		MethodHandler(http.MethodGet, handlerHello).
 		MethodHandler(http.MethodDelete, handlerGoodbye)
 
