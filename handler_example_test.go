@@ -24,7 +24,7 @@ func ExampleWaggyHandler_WithDefaultResponse() {
 		_ = fmt.Errorf("error marshaling body, err: %s", err)
 	}
 
-	handler := wagi.InitHandlerWithRoute("/example/test/route", &flg).
+	handler := wagi.NewHandlerWithRoute("/example/test/route", &flg).
 		MethodHandler(http.MethodDelete, goodbyeHandler).
 		WithDefaultResponse(defaultResponseBytes)
 
@@ -45,7 +45,7 @@ func ExampleWaggyHandler_WithDefaultErrorResponse() {
 		Status: http.StatusBadRequest,
 	}
 
-	handler := wagi.InitHandlerWithRoute("/example/test/route", &flg).
+	handler := wagi.NewHandlerWithRoute("/example/test/route", &flg).
 		MethodHandler(http.MethodDelete, goodbyeHandler).
 		WithDefaultErrorResponse(defaultError, http.StatusBadRequest)
 
